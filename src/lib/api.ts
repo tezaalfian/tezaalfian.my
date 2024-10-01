@@ -46,23 +46,23 @@ export async function getWorks(): Promise<Work> {
         return { data: [] };
     }
 }
-
 const projectSchema = z.object({
+    id: z.number(),
+    documentId: z.string(),
+    title: z.string(),
+    description: z.string(),
+    tag: z.array(z.string()),
+    year: z.string(),
+    link: z.string().nullable(),
+    imageUrl: z.string().nullable(),
+});
+const projectsSchema = z.object({
     data: z.array(
-        z.object({
-            id: z.number(),
-            documentId: z.string(),
-            title: z.string(),
-            description: z.string(),
-            tag: z.array(z.string()),
-            year: z.string(),
-            link: z.string().nullable(),
-            imageUrl: z.string().nullable(),
-        })
+        projectSchema
     )
 })
 
-type Project = z.infer<typeof projectSchema>;
+export type Project = z.infer<typeof projectSchema>;
 
 export async function getProjects(
     {
@@ -70,13 +70,13 @@ export async function getProjects(
     }: {
         limit?: string;
     } | undefined = {}
-): Promise<Project> {
+): Promise<z.infer<typeof projectsSchema>> {
     const query = new URLSearchParams({
         "pagination[limit]": limit ?? "all",
     })
     try {
         const res = await fetch(`${API_URL}projects?${query.toString()}`, { cache: 'no-store' }).then((res) => res.json());
-        return projectSchema.parse(res);
+        return projectsSchema.parse(res);
     } catch (error) {
         if (error instanceof z.ZodError) {
             return { data: [] };

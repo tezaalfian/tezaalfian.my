@@ -1,9 +1,9 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getProjects, getWorks } from "@/lib/api";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import ProjectCard from "./project-card";
 
 const info = [
     {
@@ -59,26 +59,7 @@ export default async function Page() {
                     <h3 className="font-bold text-lg mb-5">Projects</h3>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
                         {projects.data.map((item) => (
-                            <Link key={item.documentId} className="hover:bg-primary/5 p-4 -mx-4 rounded-md" href={item.link ? item.link : '#'} target={item.link ? "_blank" : "_self"}>
-                                <div className="aspect-video overflow-hidden rounded shadow mb-3 relative">
-                                    <Badge variant="secondary" className="mb-2 absolute top-2 right-2">{item.year}</Badge>
-                                    <Image
-                                        src={item.imageUrl ?? '/images/fallback.png'}
-                                        alt={item.title}
-                                        sizes="100vw"
-                                        width={500}
-                                        placeholder="blur"
-                                        blurDataURL="/images/fallback.png"
-                                        className="object-cover"
-                                        height={300}
-                                    />
-                                </div>
-                                <h4 className="font-semibold mb-1">{item.title}</h4>
-                                <p className="text-muted-foreground text-sm line-clamp-2 mb-2">{item.description}</p>
-                                {item.tag.map((tag, index) => (
-                                    <Badge key={`tag-${index}`} variant="outline" className="mr-2 mt-2">{tag}</Badge>
-                                ))}
-                            </Link>
+                            <ProjectCard key={item.id} data={item} />
                         ))}
                     </div>
                 </div>
