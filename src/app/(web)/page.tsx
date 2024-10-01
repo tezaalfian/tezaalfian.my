@@ -1,24 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { getProjects, getWorks } from "@/lib/api";
-import { Github, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ProjectCard from "./project-card";
-
-const info = [
-    {
-        href: "https://x.com/tezaalfian",
-        icon: <Twitter size={24} />,
-    },
-    {
-        href: "https://www.linkedin.com/in/teza-alfian/",
-        icon: <Linkedin size={24} />,
-    },
-    {
-        href: "https://github.com/tezaalfian",
-        icon: <Github size={24} />,
-    },
-]
+import Contact from "./contact";
 
 export default async function Page() {
     const works = await getWorks();
@@ -32,15 +16,7 @@ export default async function Page() {
                 <p className="text-muted-foreground mb-5">
                     I&apos;m a software engineer that&apos;s passionate about developing software solutions, focused more on web development.
                 </p>
-                <div className="flex gap-x-2">
-                    {info.map((item, index) => (
-                        <Button asChild size="icon" variant="ghost" key={`link-${index}`}>
-                            <Link href={item.href} target="_blank">
-                                {item.icon}
-                            </Link>
-                        </Button>
-                    ))}
-                </div>
+                <Contact />
             </section>
             <section className="lg:grid lg:grid-cols-5 lg:gap-8">
                 <div className="mb-12 lg:order-2 col-span-2">

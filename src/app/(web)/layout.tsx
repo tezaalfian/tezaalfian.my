@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function Layout({
     children
@@ -13,6 +14,7 @@ export default function Layout({
                 {children}
             </main>
             <Footer />
+            <Toaster />
         </>
     );
 }
