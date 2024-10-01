@@ -7,7 +7,8 @@ const nextConfig = {
                 protocol: 'https',
             }
         ]
-    }
+    },
+    transpilePackages: ['next-mdx-remote'],
 };
 
 export default nextConfig;
