@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { baseUrl } from "./sitemap";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -52,6 +53,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* <GoogleTagManager gtmId="GTM-TZ9NFQ9Q" /> */}
+      <GoogleAnalytics gaId="G-C2NZ1PSX6Q" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background font-sans text-foreground`}
       >
