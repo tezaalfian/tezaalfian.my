@@ -18,12 +18,11 @@ export default function ProjectCard({
                 <Image
                     src={data.imageUrl ?? '/images/fallback.png'}
                     alt={data.title}
-                    sizes="100vw"
-                    width={500}
+                    width={1200}
                     placeholder="blur"
                     blurDataURL="/images/fallback.png"
-                    className="object-cover"
-                    height={300}
+                    className="object-cover w-full"
+                    height={(1200 * 16) / 9}
                 />
             </div>
             <h4 className="font-semibold mb-1">{data.title}</h4>
