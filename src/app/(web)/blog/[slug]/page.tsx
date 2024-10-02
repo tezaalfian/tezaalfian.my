@@ -1,8 +1,49 @@
+import { baseUrl } from "@/app/sitemap";
 import { CustomMDX } from "@/components/mdx";
 import { getBlogPost } from "@/lib/blog";
 import { format, formatDistance } from "date-fns";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
+export function generateMetadata({ params }: { params: { slug: string } }) {
+    const blog = getBlogPost(params.slug);
+    if (!blog) {
+        return
+    }
+
+    const {
+        title,
+        publishedAt: publishedTime,
+        summary: description,
+        image,
+    } = blog.metadata
+    const ogImage = image
+        ? image
+        : `${baseUrl}/og?title=${encodeURIComponent(title)}`
+
+    return {
+        title: `${title} - Teza Alfian`,
+        description,
+        openGraph: {
+            title: `${title} - Teza Alfian`,
+            description,
+            type: 'article',
+            publishedTime,
+            url: `${baseUrl}/blog/${params.slug}`,
+            images: [
+                {
+                    url: ogImage,
+                },
+            ],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: `${title} - Teza Alfian`,
+            description,
+            images: [ogImage],
+        },
+    }
+}
 
 export default function Page({ params }: { params: { slug: string } }) {
     const blog = getBlogPost(params.slug);

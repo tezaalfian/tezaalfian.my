@@ -1,3 +1,5 @@
+import { baseUrl } from "./sitemap";
+
 export default function robots() {
     return {
         rules: [
@@ -5,7 +7,7 @@ export default function robots() {
                 userAgent: '*',
             },
         ],
-        sitemap: 'https://tezaalfian.my.id/sitemap.xml',
-        host: 'https://tezaalfian.my.id',
+        sitemap: `${baseUrl}/sitemap.xml`,
+        host: baseUrl,
     };
 }
