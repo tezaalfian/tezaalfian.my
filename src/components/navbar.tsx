@@ -8,7 +8,6 @@ const menus = [
     { name: "Home", href: "/" },
     { name: "Work", href: "/work" },
     { name: "Project", href: "/project" },
-    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
 ];
 export default function NavBar() {

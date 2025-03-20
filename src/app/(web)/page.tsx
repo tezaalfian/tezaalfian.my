@@ -6,7 +6,7 @@ import Contact from "./contact";
 
 export default async function Page() {
     const works = await getWorks();
-    const projects = await getProjects({ limit: "4" });
+    const projects = await getProjects();
     return (
         <>
             <section className="max-w-xl mt-5 mb-16">
@@ -34,7 +34,7 @@ export default async function Page() {
                 <div className="col-span-3">
                     <h3 className="font-bold text-lg mb-5">Projects</h3>
                     <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4">
-                        {projects.data.map((item) => (
+                        {projects.data.slice(0, 4).map((item) => (
                             <ProjectCard key={item.id} data={item} />
                         ))}
                     </div>

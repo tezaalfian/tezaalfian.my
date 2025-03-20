@@ -33,11 +33,8 @@ const workSchema = z.object({
 type Work = z.infer<typeof workSchema>;
 
 export async function getWorks(): Promise<Work> {
-    const query = new URLSearchParams({
-        sort: "startDate:desc"
-    })
     try {
-        const res = await fetch(`${API_URL}works?${query.toString()}`).then((res) => res.json());
+        const res = await fetch(`${API_URL}2d5142e78a87f5d9269c56ad3ee3a0f4/raw/works.json`).then((res) => res.json());
         return workSchema.parse(res);
     } catch (error) {
         if (error instanceof z.ZodError) {
@@ -64,18 +61,9 @@ const projectsSchema = z.object({
 
 export type Project = z.infer<typeof projectSchema>;
 
-export async function getProjects(
-    {
-        limit
-    }: {
-        limit?: string;
-    } | undefined = {}
-): Promise<z.infer<typeof projectsSchema>> {
-    const query = new URLSearchParams({
-        "pagination[limit]": limit ?? "all",
-    })
+export async function getProjects(): Promise<z.infer<typeof projectsSchema>> {
     try {
-        const res = await fetch(`${API_URL}projects?${query.toString()}`, { cache: 'no-store' }).then((res) => res.json());
+        const res = await fetch(`${API_URL}44a85b19302011814b07f2f1cb4dea15/raw/projects.json`).then((res) => res.json());
         return projectsSchema.parse(res);
     } catch (error) {
         if (error instanceof z.ZodError) {
